@@ -6,7 +6,7 @@ O objetivo dessa lição será o aprendizado sobre DOM, assincronia, ajax e form
 ##Restrições
  - Não usar bibliotecas javascript de terceiros. (css tudo bem)
 
- ##Funcionalidades
+##Funcionalidades
 
  O cliente Carlinhos Doe resolveu fazer um blog. Tendo em vista isso, ele nos enviou uma lista de funcionalidades que ele gostaria que implementássemos em seu pseudo sistema:
 
@@ -20,7 +20,7 @@ O objetivo dessa lição será o aprendizado sobre DOM, assincronia, ajax e form
  - Não é necessário salvar a mensagem do formulário de contato, mas é necessário validar o formulário para impedir envio de qualquer campo em branco e exibir mensagens de erro e de sucesso: (Ex: "Erro: O campo email está em branco.", "Mensagem enviada com sucesso, nunca entraremos em contato :D")
  - Sou um cliente maluco, então escolha o estilo e layout que mais lhe agradar
 
- ##Instalação
+##Instalação
 
  Para pode instalar e rodar o blog será necessário ter instalado o nodejs em seu computador. Caso você ainda não possua, siga esse tutorial para a instalação do mesmo: https://www.youtube.com/watch?v=brSwmLQA0iA
 
@@ -36,7 +36,7 @@ O objetivo dessa lição será o aprendizado sobre DOM, assincronia, ajax e form
 
  Se tudo estiver ok, quando http://localhost:3000 for acessado do seu navegador, você verá uma página com o nome Blog Sobre lero lero
 
- ##Dicas
+##Dicas
 
  Você irá precisar acessar a api por ajax para buscar e inserir dados. Tem um exemplo pronto em public/js/app.js de como fazer um GET (busca) de dados na api e também tem um exemplo de como fazer um POST (inserção) de dados
 
