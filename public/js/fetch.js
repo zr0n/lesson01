@@ -1,10 +1,10 @@
-export default get = (url) => {
+export const get = (url) => {
           return  fetch(url).then((responseJson) => {
                 return responseJson.json();
             })
-         }
+         };
 
-export const post = (url = "http://localhost:3000/config", data) => {
+export const post = (url = "/config", data) => {
         return  fetch(url, {
                 method: 'post',
                 

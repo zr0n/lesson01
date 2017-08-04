@@ -1,4 +1,6 @@
-import {get, post} from './fetch'
-get("/users").then((e) => {
-    alert(e)
-})
+import {get} from './fetch';
+import listPosts from './components/posts'
+import latestPosts from './components/posts-recent'
+
+listPosts()
+latestPosts()

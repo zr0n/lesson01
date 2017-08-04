@@ -1,7 +1,7 @@
 import {get} from '../fetch';
- get("/posts").then((post) => {
+ export default get("/posts").then((post) => {
 
-        var $containerPosts = document.querySelector("data-content='content-posts']");
+        var $containerPosts = document.querySelector("[data-content='content-posts']");
 
         var outputPosts = [];
 
@@ -17,5 +17,5 @@ import {get} from '../fetch';
 `)
         });
 
-        return $containerPosts.innerHTML = outputPosts.join(' ')
+       $containerPosts.innerHTML = outputPosts.join(' ')
     })
