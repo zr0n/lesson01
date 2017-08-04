@@ -159,9 +159,9 @@ var _fetch = __webpack_require__(0);
 
     var outputList = [];
 
-    listPost.splice(5, listPost.length);
+    var lastFive = listPost.slice(listPost.length - 5);
 
-    listPost.forEach(function (current) {
+    lastFive.forEach(function (current) {
         outputList.push('<li class="latest">' + current.title + '</li>\n');
 
         $containerList.innerHTML = outputList.join(' ');

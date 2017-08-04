@@ -5,9 +5,9 @@ get("/posts").then((listPost) => {
     
     var outputList = [];
     
-    listPost.splice(5, listPost.length)
+    var lastFive = listPost.slice(listPost.length - 5)
     
-    listPost.forEach((current) => {
+    lastFive.forEach((current) => {
         outputList.push(`<li class="latest">${current.title}</li>
 `)
         
