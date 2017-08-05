@@ -55,9 +55,10 @@ body {
     .principal-content {
         flex-direction: row;
         justify-content: space-between;
+        align-items: flex-start;
         >.site-aside {
             width: 30%;
-            margin: 0 0 0 5%;
+            margin: 5em 0;
         }
         >.site-content {
             width: 60%;

@@ -106,18 +106,43 @@ var post = exports.post = function post() {
 
 var _fetch = __webpack_require__(0);
 
-var _posts = __webpack_require__(2);
-
-var _posts2 = _interopRequireDefault(_posts);
-
-var _postsRecent = __webpack_require__(3);
+var _postsRecent = __webpack_require__(2);
 
 var _postsRecent2 = _interopRequireDefault(_postsRecent);
 
+var _singlePage = __webpack_require__(3);
+
+var _singlePage2 = _interopRequireDefault(_singlePage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _posts2.default)();
-(0, _postsRecent2.default)();
+function createPosts(postList) {
+    var outputPosts = [];
+
+    return outputPosts = postList.map(function (post, index) {
+
+        return '<article class="post-content">\n                <h2 class="title">' + post.title + '</h2>\n\n                <p class="text">' + (post.content.substr(0, 130) + "...") + '</p>\n                \n                <a data-content="read-more" href="/posts/' + (index + 1) + '" class="more">Leia Mais</a>\n            </article>\n                        ';
+    });
+};
+
+(0, _fetch.get)("/posts").then(function (posts) {
+    return createPosts(posts);
+}).then(function (postArray) {
+
+    var $containerPosts = document.querySelector('[data-content="content-posts"]');
+    var $containerMain = document.querySelector('[data-content="main"]');
+
+    $containerPosts.innerHTML = postArray.join('');
+
+    document.querySelectorAll('[data-content="read-more"]').forEach(function (element) {
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            $containerPosts.remove();
+            $containerMain.innerHTML += (0, _singlePage2.default)();
+            //$containerPosts.innerHTML = postArray.map(e => e = "").join('')
+        });
+    });
+});
 
 /***/ }),
 /* 2 */
@@ -126,23 +151,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _fetch = __webpack_require__(0);
 
-exports.default = (0, _fetch.get)("/posts").then(function (post) {
+function createList(list) {
+    var outputList = [];
 
-  var $containerPosts = document.querySelector("[data-content='content-posts']");
+    var lastFive = list.slice(list.length - 5);
 
-  var outputPosts = [];
+    return outputList = lastFive.map(function (current) {
+        return '<li class="latest">' + current.title + '</li>';
+    });
+}
 
-  post.forEach(function (posts, index) {
-    outputPosts.push("\n  <article class=\"post-content\">\n                <h2 class=\"title\">" + posts.title + "</h2>\n\n                <p class=\"text\">" + posts.content + "</p>\n                \n                <a href=\"/posts/" + index + "\" class=\"more\">Leia Mais</a>\n            </article>\n");
-  });
-
-  $containerPosts.innerHTML = outputPosts.join(' ');
+(0, _fetch.get)("/posts").then(function (listPost) {
+    return createList(listPost);
+}).then(function (item) {
+    var $containerList = document.querySelector('[data-content="list-posts"]');
+    $containerList.innerHTML = item.join('');
 });
 
 /***/ }),
@@ -152,21 +177,13 @@ exports.default = (0, _fetch.get)("/posts").then(function (post) {
 "use strict";
 
 
-var _fetch = __webpack_require__(0);
-
-(0, _fetch.get)("/posts").then(function (listPost) {
-    var $containerList = document.querySelector('[data-content="list-posts"]');
-
-    var outputList = [];
-
-    var lastFive = listPost.slice(listPost.length - 5);
-
-    lastFive.forEach(function (current) {
-        outputList.push('<li class="latest">' + current.title + '</li>\n');
-
-        $containerList.innerHTML = outputList.join(' ');
-    });
+Object.defineProperty(exports, "__esModule", {
+    value: true
 });
+
+exports.default = function () {
+    return "\n        <section class=\"single-page\">\n    <p class=\"content\"></p>\n    <form action=\"\">\n        <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\"></textarea>\n        <button></button>\n    </form>\n</section>\n";
+};
 
 /***/ })
 /******/ ]);
