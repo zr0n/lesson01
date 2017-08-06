@@ -1,11 +1,21 @@
-export default function() {
+export default function (fullPost) {
     return `
-        <section class="single-page">
-    <p class="content"></p>
-    <form action="">
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <button></button>
-    </form>
-</section>
+  <h2 class="title">${fullPost.title}</h2>
+
+  <p class="content">${fullPost.content}</p>
+
+  <span class="heading"><b>Comentários:</b></span>
+
+    <div class="user-comment" data-content="user-comment">
+    </div>
+
+<form class="comments" action=".">
+    <input required class="username" type="text" name="user" placeholder="Insira seu nome">
+
+    <textarea required placeholder="Insira seu comentário" name="body" class="message"></textarea>
+
+    <input type="submit" value="Postar seu comentário" class="send">
+</form>
+
 `
 }

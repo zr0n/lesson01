@@ -114,6 +114,10 @@ var _singlePage = __webpack_require__(3);
 
 var _singlePage2 = _interopRequireDefault(_singlePage);
 
+var _commentsList = __webpack_require__(4);
+
+var _commentsList2 = _interopRequireDefault(_commentsList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function createPosts(postList) {
@@ -121,16 +125,35 @@ function createPosts(postList) {
 
     return outputPosts = postList.map(function (post, index) {
 
-        return '<article class="post-content">\n                <h2 class="title">' + post.title + '</h2>\n\n                <p class="text">' + (post.content.substr(0, 130) + "...") + '</p>\n                \n                <a data-content="read-more" href="/posts/' + (index + 1) + '" class="more">Leia Mais</a>\n            </article>\n                        ';
+        return '<article class="post-content">\n                <h2 class="title">' + post.title + '</h2>\n\n                <p class="text">' + (post.content.substr(0, 130) + "...") + '</p>\n                \n                <a data-content="read-more" href="/posts/' + post.id + '" class="more">Leia Mais</a>\n            </article>\n                        ';
     });
 };
+
+function createContentSingle(local) {
+
+    var $containerMain = document.querySelector('[data-content="main"]');
+
+    $containerMain.innerHTML += '\n    <section class="single-page" data-content="single">\n        <!-- Conte\xFAdo inserido de forma din\xE2mica quando chamado -->\n    </section>';
+
+    var $containerSingle = document.querySelector('[data-content="single"]');
+
+    (0, _fetch.get)(local).then(function (full) {
+        $containerSingle.innerHTML += (0, _singlePage2.default)(full);
+        return full;
+    }).then(function (commentsAll) {
+        var $containerComments = document.querySelector('[data-content="user-comment"]');
+
+        (0, _fetch.get)('/comments?postId=' + commentsAll.id).then(function (comment) {
+            $containerComments.innerHTML = (0, _commentsList2.default)(comment);
+        });
+    });
+}
 
 (0, _fetch.get)("/posts").then(function (posts) {
     return createPosts(posts);
 }).then(function (postArray) {
 
     var $containerPosts = document.querySelector('[data-content="content-posts"]');
-    var $containerMain = document.querySelector('[data-content="main"]');
 
     $containerPosts.innerHTML = postArray.join('');
 
@@ -138,11 +161,14 @@ function createPosts(postList) {
         element.addEventListener('click', function (e) {
             e.preventDefault();
             $containerPosts.remove();
-            $containerMain.innerHTML += (0, _singlePage2.default)();
+            createContentSingle(element.href);
             //$containerPosts.innerHTML = postArray.map(e => e = "").join('')
         });
     });
 });
+
+// Se o post tiver o ID igual o Comentário ele aparece
+// obtem o href e com ele ua o get pra obter resto do conteúdo
 
 /***/ }),
 /* 2 */
@@ -181,9 +207,30 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-exports.default = function () {
-    return "\n        <section class=\"single-page\">\n    <p class=\"content\"></p>\n    <form action=\"\">\n        <textarea name=\"\" id=\"\" cols=\"30\" rows=\"10\"></textarea>\n        <button></button>\n    </form>\n</section>\n";
+exports.default = function (fullPost) {
+    return "\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\".\">\n    <input required class=\"username\" type=\"text\" name=\"user\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"body\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\">\n</form>\n\n";
 };
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (comment) {
+    var outputComments = [];
+
+    return outputComments = comment.map(function (posted) {
+        return '<span class="username">' + posted.author + '</span>\n\n        <p class="comment">' + posted.content + '</p>\n';
+    }).join('');
+};
+
+var _fetch = __webpack_require__(0);
 
 /***/ })
 /******/ ]);

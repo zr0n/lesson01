@@ -1,9 +1,6 @@
-import {
-    get
-} from './fetch';
+import {get} from './fetch';
 import latestPosts from './components/posts-recent'
 import singlePage from './components/single-page'
-import commentsList from './components/comments-list'
 
 function createPosts(postList) {
     var outputPosts = [];
@@ -15,34 +12,18 @@ function createPosts(postList) {
 
                 <p class="text">${post.content.substr(0, 130) + "..."}</p>
                 
-                <a data-content="read-more" href="/posts/${post.id}" class="more">Leia Mais</a>
+                <a data-content="read-more" href="/posts/${index + 1}" class="more">Leia Mais</a>
             </article>
                         `)
     })
 };
 
 function createContentSingle(local) {
-
     var $containerMain = document.querySelector('[data-content="main"]');
-
-    $containerMain.innerHTML += `
-    <section class="single-page" data-content="single">
-        <!-- Conteúdo inserido de forma dinâmica quando chamado -->
-    </section>`
-
-    var $containerSingle = document.querySelector('[data-content="single"]');
-
-    get(local).then((full) => {
-            $containerSingle.innerHTML += singlePage(full);
-            return full
-        })
-        .then((commentsAll) => {
-           var $containerComments = document.querySelector('[data-content="user-comment"]');
-        
-            get(`/comments?postId=${commentsAll.id}`).then((comment) => {
-                $containerComments.innerHTML = commentsList(comment)
-            })
-        })
+    $containerMain.innerHTML += singlePage();
+    get(local).then((r) => {
+        $containerMain.innerHTML += r.content
+    })
 }
 
 get("/posts")
