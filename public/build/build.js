@@ -71,30 +71,28 @@
 
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+    value: true
 });
 var get = exports.get = function get(url) {
-        return fetch(url).then(function (responseJson) {
-                return responseJson.json();
-        });
+    return fetch(url).then(function (responseJson) {
+        return responseJson.json();
+    });
 };
 
-var post = exports.post = function post() {
-        var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/config";
-        var data = arguments[1];
+var post = exports.post = function post(url, data) {
+    return fetch(url, {
+        method: 'post',
 
-        return fetch(url, {
-                method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
 
-                headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                },
+        body: JSON.stringify(data)
 
-                body: JSON.stringify({
-                        data: data
-                })
-        });
+    }).catch(function (erroSend) {
+        console.warn('Erro ao enviar mensagem: ' + erroSend);
+    });
 };
 
 /***/ }),
@@ -120,6 +118,9 @@ var _commentsList2 = _interopRequireDefault(_commentsList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import errosTypes from './components/errors-list'
+
+
 function createPosts(postList) {
     var outputPosts = [];
 
@@ -143,8 +144,20 @@ function createContentSingle(local) {
     }).then(function (commentsAll) {
         var $containerComments = document.querySelector('[data-content="user-comment"]');
 
-        (0, _fetch.get)('/comments?postId=' + commentsAll.id).then(function (comment) {
+        (0, _fetch.get)('/posts/' + commentsAll.id + '/comments').then(function (comment) {
             $containerComments.innerHTML = (0, _commentsList2.default)(comment);
+        });
+
+        document.forms[0].send.addEventListener("click", function () {
+            var COMMENTS_FORM = {
+                username: document.forms[0].username.value,
+                message: document.forms[0].message.value
+            };
+
+            (0, _fetch.post)('/posts/' + commentsAll.id + '/comments', {
+                author: COMMENTS_FORM.username,
+                content: COMMENTS_FORM.message
+            });
         });
     });
 }
@@ -162,13 +175,9 @@ function createContentSingle(local) {
             e.preventDefault();
             $containerPosts.remove();
             createContentSingle(element.href);
-            //$containerPosts.innerHTML = postArray.map(e => e = "").join('')
         });
     });
 });
-
-// Se o post tiver o ID igual o Comentário ele aparece
-// obtem o href e com ele ua o get pra obter resto do conteúdo
 
 /***/ }),
 /* 2 */
@@ -208,7 +217,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (fullPost) {
-    return "\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\".\">\n    <input required class=\"username\" type=\"text\" name=\"user\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"body\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\">\n</form>\n\n";
+    return "\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\"\">\n    <input required class=\"username\" type=\"text\" name=\"username\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"message\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\" name=\"send\">\n</form>\n\n";
 };
 
 /***/ }),

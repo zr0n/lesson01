@@ -1,9 +1,12 @@
 import {
-    get
+    get,
+    post
 } from './fetch';
-import latestPosts from './components/posts-recent'
-import singlePage from './components/single-page'
-import commentsList from './components/comments-list'
+import latestPosts from './components/posts-recent';
+import singlePage from './components/single-page';
+import commentsList from './components/comments-list';
+//import errosTypes from './components/errors-list'
+
 
 function createPosts(postList) {
     var outputPosts = [];
@@ -37,11 +40,23 @@ function createContentSingle(local) {
             return full
         })
         .then((commentsAll) => {
-           var $containerComments = document.querySelector('[data-content="user-comment"]');
-        
-            get(`/comments?postId=${commentsAll.id}`).then((comment) => {
-                $containerComments.innerHTML = commentsList(comment)
+            var $containerComments = document.querySelector('[data-content="user-comment"]');
+
+            get(`/posts/${commentsAll.id}/comments`).then((comment) => {
+                $containerComments.innerHTML = commentsList(comment);
             })
+
+            document.forms[0].send.addEventListener("click", () => {
+                    const COMMENTS_FORM = {
+                        username: document.forms[0].username.value,
+                        message: document.forms[0].message.value
+                    }
+
+                    post(`/posts/${commentsAll.id}/comments`, {
+                        author: COMMENTS_FORM.username,
+                        content: COMMENTS_FORM.message
+                    })
+                })
         })
 }
 
@@ -60,11 +75,7 @@ get("/posts")
                 e.preventDefault();
                 $containerPosts.remove()
                 createContentSingle(element.href)
-                //$containerPosts.innerHTML = postArray.map(e => e = "").join('')
             })
         })
     })
 
-
-// Se o post tiver o ID igual o Comentário ele aparece
-// obtem o href e com ele ua o get pra obter resto do conteúdo
