@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'header';
+@import 'single';
 html,
 body {
     padding: 0;
@@ -8,7 +9,7 @@ body {
 }
 
 .principal-content {
-    color: #544448;
+    color: $colorTextPrimaryFont;
     width: 90vw;
     margin: -10% 5%;
     padding: 0 0 30px 0;
@@ -20,17 +21,20 @@ body {
     text-align: center;
     >.site-aside {
         margin-top: 20px;
+        order: 2;
         >.heading {
+            color: $colorTextPrimaryFont;
             margin-bottom: 300px;
         }
     }
     >.site-content {
         padding: 0 10px;
         >.post-content {
-            border-bottom: 1px solid $headerColor;
+            border-bottom: 1px solid $colorSeparator;
             padding-bottom: 40px;
             >.text {
-                font-family: serif
+                font-family: serif;
+                color: $colorTextPrimaryFont;
             }
         }
         >.post-content:last-child {
@@ -46,7 +50,7 @@ body {
     >.latest {
         margin-bottom: 10px;
         >.topic {
-            color: $colorTextFont;
+            color: $colorTextPrimaryFont;
         }
     }
 }
@@ -55,9 +59,10 @@ body {
     .principal-content {
         flex-direction: row;
         justify-content: space-between;
+        align-items: flex-start;
         >.site-aside {
             width: 30%;
-            margin: 0 0 0 5%;
+            margin: 5em 0;
         }
         >.site-content {
             width: 60%;

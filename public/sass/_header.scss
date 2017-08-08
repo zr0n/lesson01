@@ -11,7 +11,9 @@
     text-align: center;
     >.name {
         font-family: monospace;
-        font-size: 16pt;
+        font-size: 20pt;
+        padding: 0;
+        margin: 10px 0;
     }
 }
 
@@ -23,7 +25,8 @@
         margin: 15px 0;
         >.anchor {
             color: $colorMenuFont;
-            transition-duration: .2s
+            transition-duration: .2s;
+            font-size: 16pt
         }
     }
 }
@@ -34,7 +37,6 @@
         justify-content: space-between;
         >.name {
             margin: 20px 2em;
-            font-size: 20pt;
         }
     }
     .menu-items {
@@ -43,6 +45,9 @@
             font-size: 13pt;
             display: inline-block;
             margin: 20px 2em;
+            >.anchor {
+                font-size: 14pt;
+            }
             >.anchor:hover {
                 color: #f1f1f1;
                 transition-duration: .2s

@@ -8,9 +8,9 @@
   },
   "posts": [
     {
-      "content": "A certificação de metodologias que nos auxiliam a lidar com o escopo das preferências de consumo representa uma abertura para a melhoria do aceite do cliente inegavelmente apropriado.",
+      "content": "Mais e mais desenvolvedores estão usando o webpack para facilitar o seu processo de build, mas mesmo em 2017, muitos sites ainda não aproveitam as melhores configurações de desempenho que o webpack oferece. O webpack tem por padrão algumas opções de otimizações para lá de impressionantes, e que você pode não saber de início. Aliás, você está utilizando tudo isso? Neste artigo, iremos abordar 7 otimizações fáceis do webpack, que irá melhorar seu aplicativo deixando-o mais rápido aos usuários, independentemente do que você esteja usando (e uma opção de fallback, quando não for possível usar importações dinâmicas). Em um aplicativo de exemplo, começando com nenhuma otimização, iremos compactar nosso JS em 700% e melhorar o armazenamento com cache inteligente para atualizações rápidas. A melhor parte? Você pode ter um site com carregamento mais rápido em apenas 15 minutos implementando algumas dessas dicas. Você pode, realisticamente, implementar todas essas dicas em cerca de 1 hora. Esse artigo assume que você esteja usando webpack 3.x (3.x tem uma impressionante taxa de 98% de atualização sem dores de cabeça da 2.x, ou seja, raramente você não terá problemas ao atualizar). Se você ainda está na versão 1.x, você precisa atualizar para poder tirar vantagem da automatização automática de tree-shaking e dead code elimination. Códigos para nosso exemplo. Todos os exemplos, funcionando, de todos esses conceitos desse artigo, podem ser encontrados nesse repositório. Haverá também links em cada seção. Isso é cumulativo sempre que possível, então os recursos adicionados em um passo serão transferidos para o próximo.",
       "date": 1502334000000,
-      "title": "Post 1",
+      "title": "webpack para alta performance front-end",
       "id": 1
     },
     {
@@ -74,6 +74,24 @@
       "content": "Lorem ipsum sit dolor amet",
       "postId": "1",
       "id": 1
+    },
+    {
+      "author": "Pedro",
+      "content": "Morbi rhoncus imperdiet quam, eget varius ipsum egestas in. Nulla facilisi. Phasellus convallis auctor odio nec suscipit. Integer placerat consectetur urna dapibus fringilla. Vivamus eget quam a ligula condimentum aliquam. Aliquam auctor nunc placerat, placerat nulla vel, varius justo. Aenean vitae dolor tellus",
+      "postId": "1",
+      "id": "2"
+    },
+    {
+      "author": "d",
+      "content": "d",
+      "postId": "1",
+      "id": "ryAViB8vW"
+    },
+    {
+      "author": "e",
+      "content": "e",
+      "postId": "1",
+      "id": "SJHT6iIPW"
     }
   ]
 }

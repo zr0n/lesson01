@@ -16,7 +16,7 @@
         <nav class="navigation-menu">
             <h1 class="name">Lero Lero</h1>
             <ul class="menu-items">
-                <li class="item"><a class="anchor" href="#">Posts</a></li>
+                <li class="item"><a href="index.html" class="anchor" href="#">Posts</a></li>
                 <li class="item"><a class="anchor" href="#">Sobre nós</a></li>
                 <li class="item"><a class="anchor" href="#">Contato</a></li>
             </ul>
@@ -24,7 +24,13 @@
 
     </header>
 
-    <main class="principal-content">
+    <main class="principal-content" data-content="main">
+
+        <!-- Posts do blog -->
+
+        <section class="site-content" data-content="content-posts">
+            <!-- Conteúdo inserido de forma dinâmica -->
+        </section>
 
         <!-- Listagem de posts recentes do blog -->
 
@@ -32,31 +38,12 @@
             <span class="heading"><b>Posts recentes:</b></span>
             <ul class="list-posts" data-content="list-posts">
                 <!-- Conteúdo inserido de forma dinâmica -->
-                <li class="latest"><a href="#" class="topic">Post 1</a></li>
-                <li class="latest"><a href="#" class="topic">Post 2</a></li>
-                <li class="latest"><a href="#" class="topic">Post 3</a></li>
-                <li class="latest"><a href="#" class="topic">Post 4</a></li>
-                <!-- --- -->
             </ul>
         </aside>
 
-        <!-- Posts do blog -->
-
-        <section class="site-content" data-content="content-posts">
-            <!-- Conteúdo inserido de forma dinâmica -->
-            <article class="post-content">
-                <h2 class="title">Loren ipsum</h2>
-
-                <p class="text">Aenean ac tortor odio. Vestibulum scelerisque leo justo. Ut sed lobortis elit. Donec vestibulum turpis eget rutrum tincidunt. Ut facilisis dui ligula, in sollicitudin turpis mattis id. Morbi eget sollicitudin sapien, ullamcorper vehicula enim. Vestibulum mattis, libero sed porta venenatis, magna nulla venenatis nibh, ac porttitor urna felis a nisl. Suspendisse rhoncus nunc non tincidunt convallis. Maecenas quis pulvinar nisl. Nam dictum ornare turpis at euismod. Duis auctor feugiat lectus, a porttitor elit volutpat non. Sed vestibulum nibh at massa euismod euismod. Praesent consectetur lorem quis sem lobortis rhoncus. Donec volutpat magna sit amet tempus suscipit.
-
-</p>
-                <a href="single-post.html" class="more">Leia Mais</a>
-            </article>
-            <!-- --- -->
-        </section>
-
     </main>
-    <script src="js/main.js"></script>
+
+    <script src="build/build.js"></script>
 </body>
 
 </html>
