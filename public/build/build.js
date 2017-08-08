@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/public/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
@@ -116,11 +116,13 @@ var _commentsList = __webpack_require__(4);
 
 var _commentsList2 = _interopRequireDefault(_commentsList);
 
+var _aboutConf = __webpack_require__(5);
+
+var _aboutConf2 = _interopRequireDefault(_aboutConf);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import errosTypes from './components/errors-list'
-
-
+//Função que lista os posts na home
 function createPosts(postList) {
     var outputPosts = [];
 
@@ -130,6 +132,7 @@ function createPosts(postList) {
     });
 };
 
+//Função responsável por criar a single page de cada post
 function createContentSingle(local) {
 
     var $containerMain = document.querySelector('[data-content="main"]');
@@ -138,16 +141,21 @@ function createContentSingle(local) {
 
     var $containerSingle = document.querySelector('[data-content="single"]');
 
+    //Imprime o conteúdo obtido em single page
     (0, _fetch.get)(local).then(function (full) {
         $containerSingle.innerHTML += (0, _singlePage2.default)(full);
         return full;
     }).then(function (commentsAll) {
         var $containerComments = document.querySelector('[data-content="user-comment"]');
 
+        //Obtém a lista de comentários e imprime na tela
         (0, _fetch.get)('/posts/' + commentsAll.id + '/comments').then(function (comment) {
             $containerComments.innerHTML = (0, _commentsList2.default)(comment);
+        }).catch(function (errorGetComments) {
+            console.error(errorGetComments);
         });
 
+        //Função responsável por inserir o comentário digitado pelo usuário
         document.forms[0].send.addEventListener("click", function () {
             var COMMENTS_FORM = {
                 username: document.forms[0].username.value,
@@ -157,11 +165,17 @@ function createContentSingle(local) {
             (0, _fetch.post)('/posts/' + commentsAll.id + '/comments', {
                 author: COMMENTS_FORM.username,
                 content: COMMENTS_FORM.message
+            }).catch(function (errorPostMessages) {
+                console.error(errorPostMessages);
             });
         });
+    }).catch(function (errorCreateSingle) {
+        //Caso não seja possível renderizar o conteúdo da single page na tela
+        console.error(errorCreateSingle);
     });
 }
 
+//Função responsável por obter a lista de posts do arquivo db.json
 (0, _fetch.get)("/posts").then(function (posts) {
     return createPosts(posts);
 }).then(function (postArray) {
@@ -177,6 +191,8 @@ function createContentSingle(local) {
             createContentSingle(element.href);
         });
     });
+}).catch(function (errorGetPosts) {
+    console.error(errorGetPosts);
 });
 
 /***/ }),
@@ -188,6 +204,7 @@ function createContentSingle(local) {
 
 var _fetch = __webpack_require__(0);
 
+//Cria a lista de posts no aside com apenas o título
 function createList(list) {
     var outputList = [];
 
@@ -197,12 +214,14 @@ function createList(list) {
         return '<li class="latest">' + current.title + '</li>';
     });
 }
-
+//Otém a lista de posts
 (0, _fetch.get)("/posts").then(function (listPost) {
     return createList(listPost);
 }).then(function (item) {
     var $containerList = document.querySelector('[data-content="list-posts"]');
     $containerList.innerHTML = item.join('');
+}).catch(function (errorGetAsidePosts) {
+    console.warn(errorGetAsidePosts);
 });
 
 /***/ }),
@@ -217,7 +236,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (fullPost) {
-    return "\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\"\">\n    <input required class=\"username\" type=\"text\" name=\"username\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"message\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\" name=\"send\">\n</form>\n\n";
+    return "\n<a href=\"index.html\"> Voltar</a>\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\"\">\n    <input required class=\"username\" type=\"text\" name=\"username\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"message\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\" name=\"send\">\n</form>\n\n";
 };
 
 /***/ }),
@@ -240,6 +259,27 @@ exports.default = function (comment) {
 };
 
 var _fetch = __webpack_require__(0);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _fetch = __webpack_require__(0);
+
+var $containerAbout = document.querySelector('[data-content="about"]');
+
+//Obtém o conteúdo da página About
+(0, _fetch.get)("/config").then(function (aboutConf) {
+
+    return '\n        <p class="description">' + aboutConf.aboutUs + '</p>\n        <address class="address">\n            <p>Telefone: ' + aboutConf.telephone + '</p>\n            <p>email: <a href="mailto:asknot@answernot.com">' + aboutConf.email + '<a/></p>\n            <p>Endere\xE7o: ' + aboutConf.address + '</p>\n        </address>\n';
+}).then(function (createAbout) {
+    $containerAbout.innerHTML += createAbout;
+}).catch(function (errorCreateAbout) {
+    console.error(errorCreateAbout);
+});
 
 /***/ })
 /******/ ]);

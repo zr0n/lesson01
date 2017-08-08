@@ -1,5 +1,6 @@
 export default function (fullPost) {
     return `
+<a href="index.html"> Voltar</a>
   <h2 class="title">${fullPost.title}</h2>
 
   <p class="content">${fullPost.content}</p>

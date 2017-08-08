@@ -6,7 +6,6 @@ module.exports = {
     output: {
         path: join(__dirname, 'public', 'build'),
         filename: 'build.js',
-        publicPath: '/public/'
     },
 
     module: {
@@ -20,7 +19,7 @@ module.exports = {
                         presets: ['env']
                     }
                 }
-    }
-  ],
+            }
+  ]
     }
 };

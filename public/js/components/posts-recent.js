@@ -1,5 +1,8 @@
-import {get} from '../fetch'
+import {
+    get
+} from '../fetch'
 
+//Cria a lista de posts no aside com apenas o título
 function createList(list) {
     var outputList = [];
 
@@ -9,11 +12,13 @@ function createList(list) {
         return (`<li class="latest">${current.title}</li>`)
     })
 }
-
+//Otém a lista de posts
 get("/posts").then((listPost) => {
         return createList(listPost)
     })
     .then((item) => {
         var $containerList = document.querySelector('[data-content="list-posts"]');
         $containerList.innerHTML = item.join('')
+    }).catch((errorGetAsidePosts) => {
+        console.warn(errorGetAsidePosts)
     })
