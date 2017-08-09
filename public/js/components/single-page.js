@@ -10,7 +10,7 @@ export default function (fullPost) {
     <div class="user-comment" data-content="user-comment">
     </div>
 
-<form class="comments" action="">
+<form class="comments" action="#" name="comments">
     <input required class="username" type="text" name="username" placeholder="Insira seu nome">
 
     <textarea required placeholder="Insira seu comentário" name="message" class="message"></textarea>

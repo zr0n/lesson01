@@ -148,26 +148,49 @@ function createContentSingle(local) {
     }).then(function (commentsAll) {
         var $containerComments = document.querySelector('[data-content="user-comment"]');
 
-        //Obtém a lista de comentários e imprime na tela
-        (0, _fetch.get)('/posts/' + commentsAll.id + '/comments').then(function (comment) {
-            $containerComments.innerHTML = (0, _commentsList2.default)(comment);
-        }).catch(function (errorGetComments) {
-            console.error(errorGetComments);
-        });
+        function getCommentsUsers() {
+            return (0, _fetch.get)('/posts/' + commentsAll.id + '/comments').then(function (comment) {
+                $containerComments.innerHTML = (0, _commentsList2.default)(comment);
+            }).catch(function (errorGetComments) {
+                console.error(errorGetComments);
+            });
+        }
+
+        getCommentsUsers();
 
         //Função responsável por inserir o comentário digitado pelo usuário
-        document.forms[0].send.addEventListener("click", function () {
+        document.forms[0].send.addEventListener("click", function (evt) {
+            evt.preventDefault();
             var COMMENTS_FORM = {
-                username: document.forms[0].username.value,
-                message: document.forms[0].message.value
-            };
+                form: document.forms[0],
+                username: document.forms[0].username,
+                message: document.forms[0].message
 
-            (0, _fetch.post)('/posts/' + commentsAll.id + '/comments', {
-                author: COMMENTS_FORM.username,
-                content: COMMENTS_FORM.message
-            }).catch(function (errorPostMessages) {
-                console.error(errorPostMessages);
-            });
+                //Envia o cometário do usuário depois de valida-lo:
+            };if (COMMENTS_FORM.username.value) {
+                if (COMMENTS_FORM.message.value) {
+                    (0, _fetch.post)('/posts/' + commentsAll.id + '/comments', {
+                        author: COMMENTS_FORM.username.value,
+                        content: COMMENTS_FORM.message.value
+                    }).catch(function (errorPostMessages) {
+                        console.error(errorPostMessages);
+                    });
+
+                    //Remove classe de erro
+                    COMMENTS_FORM.message.classList.remove('error');
+                    COMMENTS_FORM.username.classList.remove('error');
+                    //Reseta o formulário
+                    COMMENTS_FORM.form.reset();
+                    //Atualiza a lista de posts
+                    getCommentsUsers();
+                } else {
+                    COMMENTS_FORM.message.classList.add('error');
+                    COMMENTS_FORM.message.focus();
+                }
+            } else {
+                COMMENTS_FORM.username.classList.add('error');
+                COMMENTS_FORM.username.focus();
+            }
         });
     }).catch(function (errorCreateSingle) {
         //Caso não seja possível renderizar o conteúdo da single page na tela
@@ -236,7 +259,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (fullPost) {
-    return "\n<a href=\"index.html\"> Voltar</a>\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\"\">\n    <input required class=\"username\" type=\"text\" name=\"username\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"message\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\" name=\"send\">\n</form>\n\n";
+    return "\n<a href=\"index.html\"> Voltar</a>\n  <h2 class=\"title\">" + fullPost.title + "</h2>\n\n  <p class=\"content\">" + fullPost.content + "</p>\n\n  <span class=\"heading\"><b>Coment\xE1rios:</b></span>\n\n    <div class=\"user-comment\" data-content=\"user-comment\">\n    </div>\n\n<form class=\"comments\" action=\"#\" name=\"comments\">\n    <input required class=\"username\" type=\"text\" name=\"username\" placeholder=\"Insira seu nome\">\n\n    <textarea required placeholder=\"Insira seu coment\xE1rio\" name=\"message\" class=\"message\"></textarea>\n\n    <input type=\"submit\" value=\"Postar seu coment\xE1rio\" class=\"send\" name=\"send\">\n</form>\n\n";
 };
 
 /***/ }),

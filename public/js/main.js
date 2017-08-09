@@ -44,32 +44,58 @@ function createContentSingle(local) {
         .then((commentsAll) => {
             const $containerComments = document.querySelector('[data-content="user-comment"]');
 
-            //Obtém a lista de comentários e imprime na tela
-            get(`/posts/${commentsAll.id}/comments`).then((comment) => {
-                    $containerComments.innerHTML = commentsList(comment);
-                })
-                .catch((errorGetComments) => {
-                    console.error(errorGetComments)
-                })
+            function getCommentsUsers() {
+                return get(`/posts/${commentsAll.id}/comments`).then((comment) => {
+                        $containerComments.innerHTML = commentsList(comment);
+                    })
+                    .catch((errorGetComments) => {
+                        console.error(errorGetComments)
+                    })
+            }
+
+            getCommentsUsers()
+
 
             //Função responsável por inserir o comentário digitado pelo usuário
-            document.forms[0].send.addEventListener("click", () => {
+            document.forms[0].send.addEventListener("click", (evt) => {
+                evt.preventDefault()
                 const COMMENTS_FORM = {
-                    username: document.forms[0].username.value,
-                    message: document.forms[0].message.value
+                    form: document.forms[0],
+                    username: document.forms[0].username,
+                    message: document.forms[0].message
                 }
 
-                post(`/posts/${commentsAll.id}/comments`, {
-                    author: COMMENTS_FORM.username,
-                    content: COMMENTS_FORM.message
-                }).catch((errorPostMessages) => {
-                    console.error(errorPostMessages)
-                })
+                //Envia o cometário do usuário depois de valida-lo:
+                if (COMMENTS_FORM.username.value) {
+                    if (COMMENTS_FORM.message.value) {
+                        post(`/posts/${commentsAll.id}/comments`, {
+                            author: COMMENTS_FORM.username.value,
+                            content: COMMENTS_FORM.message.value
+                        }).catch((errorPostMessages) => {
+                            console.error(errorPostMessages)
+                        })
+                        
+                        //Remove classe de erro
+                        COMMENTS_FORM.message.classList.remove('error')
+                        COMMENTS_FORM.username.classList.remove('error')
+                        //Reseta o formulário
+                        COMMENTS_FORM.form.reset()
+                        //Atualiza a lista de posts
+                        getCommentsUsers()
+                    } else {
+                        COMMENTS_FORM.message.classList.add('error')
+                        COMMENTS_FORM.message.focus()
+                    }
+                } else {
+                    COMMENTS_FORM.username.classList.add('error')
+                    COMMENTS_FORM.username.focus()
+                }
             })
         }).catch((errorCreateSingle) => {
             //Caso não seja possível renderizar o conteúdo da single page na tela
             console.error(errorCreateSingle)
         })
+
 }
 
 //Função responsável por obter a lista de posts do arquivo db.json

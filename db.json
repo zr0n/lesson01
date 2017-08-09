@@ -70,28 +70,16 @@
   ],
   "comments": [
     {
-      "author": "fernando",
-      "content": "Lorem ipsum sit dolor amet",
+      "author": "Luan",
+      "content": "Um comentário qualquer sendo feito aqui por mim.",
       "postId": "1",
       "id": 1
     },
     {
-      "author": "Pedro",
-      "content": "Morbi rhoncus imperdiet quam, eget varius ipsum egestas in. Nulla facilisi. Phasellus convallis auctor odio nec suscipit. Integer placerat consectetur urna dapibus fringilla. Vivamus eget quam a ligula condimentum aliquam. Aliquam auctor nunc placerat, placerat nulla vel, varius justo. Aenean vitae dolor tellus",
+      "author": "Luan",
+      "content": "Erro",
       "postId": "1",
-      "id": "2"
-    },
-    {
-      "author": "d",
-      "content": "d",
-      "postId": "1",
-      "id": "ryAViB8vW"
-    },
-    {
-      "author": "e",
-      "content": "e",
-      "postId": "1",
-      "id": "SJHT6iIPW"
+      "id": 2
     }
   ]
 }

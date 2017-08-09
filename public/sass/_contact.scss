@@ -1,0 +1,8 @@
+@import 'mixins';
+.contact-content {
+    @extend .principal-content;
+    .message-contact {
+        @include flexbox;
+        @include flex-dir(column)
+    }
+}
