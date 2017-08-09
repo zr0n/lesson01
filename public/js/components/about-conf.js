@@ -10,7 +10,7 @@ get("/config").then((aboutConf) => {
         <p class="description">${aboutConf.aboutUs}</p>
         <address class="address">
             <p>Telefone: ${aboutConf.telephone}</p>
-            <p>email: <a href="mailto:asknot@answernot.com">${aboutConf.email}<a/></p>
+            <p>email: <a href="mailto:asknot@answernot.com">${aboutConf.email}</a></p>
             <p>Endereço: ${aboutConf.address}</p>
         </address>
 `)

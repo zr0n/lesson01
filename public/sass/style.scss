@@ -20,17 +20,12 @@ a {
 }
 
 .principal-content {
-    color: $colorTextPrimaryFont;
-    width: 90vw;
-    margin: -10% 5%;
-    padding: 0 0 30px 0;
+    @include box(0 0 30px 0);
     @include flexbox;
     @include flex-dir(column);
+    color: $colorTextPrimaryFont;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 0px 5px #000;
-    background: #fff;
-    text-align: center;
     >.error {
         color: red;
     }

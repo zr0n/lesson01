@@ -24,27 +24,30 @@
 
     </header>
 
-    <div class="modal-success">
+    <div class="modal-success -hide" data-modal="succes">
         <p class="message">Mensagem enviado com sucesso, aguarde o nosso retorno</p>
     </div>
-    <div class="modal-error">
-        <p class="message">Error ao enviar mensagem, por favor tente novamente mais tarde</p>
+    <div class="modal-error -hide" data-modal="error">
+        <p class="message">Erro ao enviar mensagem, por favor tente novamente mais tarde</p>
     </div>
     
     <main class="contact-content">
         <h1>Entre em contato conosco</h1>
         <form action="#" class="message-contact">
             <label for="name">Insira seu nome:</label>
-            <input type="text" id="name" class="name" placeholder="Ex: Luan">
+            <input required type="text" id="name" class="name" placeholder="Ex: Luan">
 
-            <label for="email">Insira seu email</label>
-            <input type="email" id="email" class="email" placeholder="Ex: luan@email.com">
+            <label for="email">Insira seu email:</label>
+            <input required type="email" id="email" class="email" placeholder="Ex: luan@email.com">
             
             <label for="message">Insira sua mensagem aqui:</label>
-            <textarea name="" id="message" cols="30" rows="10" placeholder="Ex: Blog Lero Lero..."></textarea>
+            <textarea required name="" id="message" cols="30" rows="10" class="message" placeholder="Ex: Blog Lero Lero..."></textarea>
+            
+            <input type="submit" class="send" value="Enviar mensagem">
         </form>
     </main>
-
+    
+    <script src="js/components/contact-conf.js"></script>
     <script src="build/build.js"></script>
 </body>
 

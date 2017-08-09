@@ -297,7 +297,7 @@ var $containerAbout = document.querySelector('[data-content="about"]');
 //Obtém o conteúdo da página About
 (0, _fetch.get)("/config").then(function (aboutConf) {
 
-    return '\n        <p class="description">' + aboutConf.aboutUs + '</p>\n        <address class="address">\n            <p>Telefone: ' + aboutConf.telephone + '</p>\n            <p>email: <a href="mailto:asknot@answernot.com">' + aboutConf.email + '<a/></p>\n            <p>Endere\xE7o: ' + aboutConf.address + '</p>\n        </address>\n';
+    return '\n        <p class="description">' + aboutConf.aboutUs + '</p>\n        <address class="address">\n            <p>Telefone: ' + aboutConf.telephone + '</p>\n            <p>email: <a href="mailto:asknot@answernot.com">' + aboutConf.email + '</a></p>\n            <p>Endere\xE7o: ' + aboutConf.address + '</p>\n        </address>\n';
 }).then(function (createAbout) {
     $containerAbout.innerHTML += createAbout;
 }).catch(function (errorCreateAbout) {

@@ -1,3 +1,4 @@
+@import 'mixins';
 .principal-content {
     >.single-page {
         display: flex;
@@ -16,43 +17,31 @@
             justify-content: flex-start;
             align-items: flex-start;
             >.username {
-                border: none;
+                @include inputs(0 0 20px 0);
                 border-bottom: 1px solid $headerColor;
-                width: 90%;
-                height: 25px;
-                margin: 0 0 20px 0;
-                 transition-duration: .5s;
             }
-            
             >.username:focus {
                 outline: none;
                 width: 100%;
                 transition-duration: .5s;
             }
-            
             >.message {
                 @extend .username;
                 height: 100px;
             }
-            
             >.send {
+                @include button;
                 border: 1px solid $headerColor;
-                background: transparent;
-                padding: 7px;
                 color: $colorTextPrimaryFont;
-                cursor: pointer;
             }
-            
             >.send:focus {
                 outline: none;
                 box-shadow: 1px 1px 2px rgba(0, 0, 0, .3) inset;
             }
-            
         }
         >.heading {
             color: $colorTextPrimaryFont;
         }
-        
         >.user-comment {
             margin: 40px 0 40px 0;
             display: flex;
@@ -61,7 +50,6 @@
             align-items: flex-start;
             text-align: left;
             padding: 0;
-            
             >.username {
                 color: #000;
                 width: 30%;
@@ -75,12 +63,10 @@
     .principal-content {
         >.single-page {
             width: 60%;
-            
             >.comments {
                 >.username {
                     width: 60%
                 }
-                
                 >.username:focus {
                     width: 70%;
                 }
