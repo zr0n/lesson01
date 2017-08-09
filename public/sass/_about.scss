@@ -1,0 +1,16 @@
+@import 'mixins';
+.about-content {
+    @include flexbox;
+    @include flex-dir(column);
+    @include box(0 1em 2em 1em);
+    color: $colorTextPrimaryFont;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+@media screen and (min-width: 640px) {
+    .about-content {
+        padding: 0 10em 2em 10em;
+    }
+}
+

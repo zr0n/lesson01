@@ -1,0 +1,37 @@
+@mixin flexbox {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin box($pad...) {
+    width: 90vw;
+    margin: -10% 5%;
+    padding: $pad;
+    box-shadow: 0px 0px 5px #000;
+    background: #fff;
+    text-align: center;
+}
+
+@mixin inputs($margin...) {
+    border: none;
+    width: 90%;
+    height: 25px;
+    margin: $margin;
+    transition-duration: .5s;
+}
+
+@mixin button {
+    background: transparent;
+    padding: 7px;
+    cursor: pointer;
+}
+
+@mixin flex-dir($direction) {
+    -webkit-flex-direction: $direction;
+    -moz-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+    flex-direction: $direction
+}

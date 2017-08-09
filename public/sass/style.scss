@@ -1,0 +1,88 @@
+@import 'variables';
+@import 'header';
+@import 'single';
+@import 'about';
+@import 'contact';
+@import 'mixins';
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+}
+
+a {
+    color: #000
+}
+
+.error {
+    border-color: #e74c3c!important
+}
+
+.principal-content {
+    @include box(0 0 30px 0);
+    @include flexbox;
+    @include flex-dir(column);
+    color: $colorTextPrimaryFont;
+    justify-content: space-between;
+    align-items: center;
+    >.error {
+        color: red;
+    }
+    >.site-aside {
+        margin-top: 20px;
+        order: 2;
+        >.heading {
+            color: $colorTextPrimaryFont;
+            margin-bottom: 300px;
+        }
+    }
+    >.site-content {
+        padding: 0 10px;
+        >.post-content {
+            border-bottom: 1px solid $colorSeparator;
+            padding-bottom: 40px;
+            padding-top: 20px;
+            >.text {
+                font-family: serif;
+                color: $colorTextPrimaryFont;
+            }
+        }
+        >.post-content:last-child {
+            border: none;
+        }
+    }
+}
+
+.list-posts {
+    margin-bottom: 30px;
+    padding: 0;
+    list-style: none;
+    >.latest {
+        margin-bottom: 10px;
+        >.topic {
+            color: $colorTextPrimaryFont;
+        }
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .principal-content {
+        @include flex-dir(row);
+        justify-content: space-between;
+        align-items: flex-start;
+        >.site-aside {
+            width: 30%;
+            margin: 5em 0;
+        }
+        >.site-content {
+            width: 60%;
+            padding: 0 5em;
+            >.post-content {
+                >.text {
+                    text-align: justify
+                }
+            }
+        }
+    }
+}

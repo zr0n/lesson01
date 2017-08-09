@@ -1,12 +1,11 @@
-{
+]{
   "name": "js_lesson_01",
   "version": "1.0.0",
   "description": "A single page application blog",
   "main": "index.js",
   "scripts": {
     "start": "json-server --watch db.json",
-    "build": "webpack --watch",
-    "sass": "sass --watch public/sass:public/css --style compressed"
+    "build": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
