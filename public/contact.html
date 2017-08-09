@@ -24,23 +24,25 @@
 
     </header>
 
-    <main class="principal-content" data-content="main">
-                
-        <!-- Posts do blog -->
+    <div class="modal-success">
+        <p class="message">Mensagem enviado com sucesso, aguarde o nosso retorno</p>
+    </div>
+    <div class="modal-error">
+        <p class="message">Error ao enviar mensagem, por favor tente novamente mais tarde</p>
+    </div>
+    
+    <main class="contact-content">
+        <h1>Entre em contato conosco</h1>
+        <form action="#" class="message-contact">
+            <label for="name">Insira seu nome:</label>
+            <input type="text" id="name" class="name" placeholder="Ex: Luan">
 
-        <section class="site-content" data-content="content-posts">
-            <!-- Conteúdo inserido de forma dinâmica -->
-        </section>
-
-        <!-- Listagem de posts recentes do blog -->
-
-        <aside class="site-aside">
-            <span class="heading"><b>Posts recentes:</b></span>
-            <ul class="list-posts" data-content="list-posts">
-                <!-- Conteúdo inserido de forma dinâmica -->
-            </ul>
-        </aside>
-
+            <label for="email">Insira seu email</label>
+            <input type="email" id="email" class="email" placeholder="Ex: luan@email.com">
+            
+            <label for="message">Insira sua mensagem aqui:</label>
+            <textarea name="" id="message" cols="30" rows="10" placeholder="Ex: Blog Lero Lero..."></textarea>
+        </form>
     </main>
 
     <script src="build/build.js"></script>
