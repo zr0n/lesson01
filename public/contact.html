@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Site de estudo">
+    <meta name="author" content="Luan AP">
+    <meta name="generator" content="Brackets 1.9.0-17312">
+    <title> Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navigation-menu">
+            <h1 class="name">Lero Lero</h1>
+            <ul class="menu-items">
+                <li class="item"><a href="index.html" class="anchor" href="index.html">Posts</a></li>
+                <li class="item"><a class="anchor" href="about.html">Sobre nós</a></li>
+                <li class="item"><a class="anchor" href="contact.html">Contato</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="modal-success -hide" data-modal="succes">
+        <p class="message">Mensagem enviado com sucesso, aguarde o nosso retorno</p>
+    </div>
+    <div class="modal-error -hide" data-modal="error">
+        <p class="message">Erro ao enviar mensagem, por favor tente novamente mais tarde</p>
+    </div>
+    
+    <main class="contact-content">
+        <h1>Entre em contato conosco</h1>
+        <form action="#" class="message-contact">
+            <label for="name">Insira seu nome:</label>
+            <input required type="text" id="name" class="name" placeholder="Ex: Luan">
+
+            <label for="email">Insira seu email:</label>
+            <input required type="email" id="email" class="email" placeholder="Ex: luan@email.com">
+            
+            <label for="message">Insira sua mensagem aqui:</label>
+            <textarea required name="" id="message" cols="30" rows="10" class="message" placeholder="Ex: Blog Lero Lero..."></textarea>
+            
+            <input type="submit" class="send" value="Enviar mensagem">
+        </form>
+    </main>
+    
+    <script src="js/components/contact-conf.js"></script>
+    <script src="build/build.js"></script>
+</body>
+
+</html>

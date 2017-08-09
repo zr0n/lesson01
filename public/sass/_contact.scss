@@ -1,0 +1,102 @@
+@import 'mixins';
+
+@keyframes a {
+    from {
+        opacity: 0
+    }
+    
+    to {
+        opacity: 1
+    }
+}
+
+.contact-content {
+    @include box(0 0 30px 0);
+    @include flexbox;
+    @include flex-dir(column);
+    align-items: center;
+    justify-content: center;
+    color: $colorTextPrimaryFont;
+    >.message-contact {
+        @include flexbox;
+        @include flex-dir(column);
+        margin: 50px 0 50px 0;
+        width: 90%;
+        justify-content: flex-start;
+        align-items: flex-start;
+        label {
+            margin-bottom: 5px;
+        }
+        >.name {
+            @include inputs(0 0 50px 0);
+            border-bottom: 1px solid $headerColor;
+        }
+        >.name:focus {
+            outline: none;
+            width: 100%;
+            transition-duration: .5s;
+        }
+        >.email {
+            @extend .name;
+        }
+        >.message {
+            @extend .name;
+            height: 100px;
+            margin: 0 0 20px 0;
+        }
+        >.send {
+            @include button;
+            border: 1px solid $headerColor;
+            color: $colorTextPrimaryFont;
+        }
+    }
+}
+
+@each $state in success,
+error {
+    .modal-#{$state} {
+        @include flexbox;
+        justify-content: center;
+        align-items: flex-start;
+        position: absolute;
+        text-align: center;
+        width: 100vw;
+        animation-name: a;
+        animation-iteration-count: 1;
+        animation-duration: .5s;
+        &.-hide {
+            display: none;
+        }
+        >.message {
+            color: $colorTextPrimaryFont;
+            padding: 50px;
+            border-radius: 5px;
+        }
+    }
+}
+
+.modal-error {
+    >.message {
+        background-color: #e74c3c;
+    }
+}
+
+.modal-success {
+    >.message {
+        background-color: $headerColor;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .contact-content {
+        >.message-contact {
+            width: 50%;
+            >.name {
+                width: 90%;
+            }
+            >.name:focus {
+                width: 100%;
+            }
+        }
+    }
+}
